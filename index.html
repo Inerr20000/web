@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Perdón</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #message {
+            font-size: 1.8em;
+            color: #333;
+            padding: 0 10px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #yesButton {
+            background-color: #4CAF50;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        #noButton {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #thanksMessage {
+            display: none;
+            padding: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            background-color: #e7f9e7;
+            color: #333;
+            max-width: 90%;
+            font-size: 1.2em;
+        }
+
+        .random-images {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .random-images img {
+            position: absolute;
+            max-width: 20%;
+            max-height: 20%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #message {
+                font-size: 1.5em;
+            }
+
+            button {
+                font-size: 14px;
+            }
+
+            #thanksMessage {
+                font-size: 1em;
+            }
+
+            .random-images img {
+                max-width: 30%;
+                max-height: 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="message">hola saritita ¿me perdonas?</h1>
+    <div class="buttons">
+        <button id="yesButton" onclick="handleYesClick()">Sí</button>
+        <button id="noButton" onclick="handleNoClick()">No</button>
+    </div>
+
+    <div id="thanksMessage">
+        gracias por perdonarme saritita te amo un infinito de infinitísimos mucho muchísimo te prometo que ya no haré tonterías porfis ya no estés enojada.
+    </div>
+
+    <!-- Randomly positioned images -->
+    <div class="random-images">
+        <img src="https://imgur.com/a/eoVIpd0" style="top: 10%; left: 5%;" alt="Imagen 1">
+        <img src="https://ibb.co/ct4xY7p" style="top: 30%; right: 10%;" alt="Imagen 2">
+        <img src="https://ibb.co/g7k0VBC" style="bottom: 15%; left: 20%;" alt="Imagen 3">
+        <img src="https://ibb.co/02KjGsW" style="bottom: 10%; right: 15%;" alt="Imagen 4">
+        <img src="https://ibb.co/gjc28SL" style="top: 5%; right: 25%;" alt="Imagen 5">
+    </div>
+
+    <script>
+        const messages = [
+            "porfis perdoname",
+            "ya no estes enojada plisporfisporfavor",
+            "ya nunca lo volvere hacer plisporfis",
+            "te digo la verdad enserio plis",
+            "te amo infinito de infinitisimos",
+            "ya no volvere hacer tonterias lo prometo",
+            "porfis perdoname no seas malita"
+        ];
+
+        let messageIndex = 0;
+
+        function handleNoClick() {
+            increaseYesButton();
+            changeMessage();
+        }
+
+        function handleYesClick() {
+            console.log("¡Gracias por perdonarme, saritita!");
+            showThanksMessage();
+        }
+
+        function increaseYesButton() {
+            const yesButton = document.getElementById('yesButton');
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = (currentSize + 2) + 'px';
+            yesButton.style.padding = (currentSize + 10) + 'px ' + (currentSize + 20) + 'px';
+        }
+
+        function changeMessage() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+        }
+
+        function showThanksMessage() {
+            document.getElementById('message').style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            document.getElementById('thanksMessage').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
